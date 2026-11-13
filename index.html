@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hector Martínez | Product Manager</title>
+<meta name="description" content="Product Manager for billing and payment platforms. Case studies from BillFlash and PayWoot.">
+<meta property="og:title" content="Hector Martínez | Product Manager">
+<meta property="og:description" content="Product Manager for billing and payment platforms. Discovery, UX design and agile delivery.">
+<meta property="og:image" content="assets/og-image.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F6F1; --surface:#FFFFFF; --ink:#14233A; --muted:#55635F;
+  --line:#D2DBD3; --green:#1D6A4F; --green-soft:#E1EEE7; --amber:#A86E00;
+  --danger:#B3261E; --danger-soft:#FBE9E7; --shadow:0 1px 0 rgba(20,35,58,.06);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0E1513; --surface:#16201D; --ink:#E4ECE7; --muted:#9BACA5;
+    --line:#2B3934; --green:#62C29A; --green-soft:#1B2D26; --amber:#E2AC45;
+    --danger:#F28B82; --danger-soft:#3A1F1D; --shadow:none;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html[data-lang="en"] [data-l="es"], html[data-lang="es"] [data-l="en"]{display:none!important}
+a{color:var(--green)}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.num{font-variant-numeric:tabular-nums}
+
+/* Header */
+.site-head{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{font-weight:700;text-decoration:none;color:var(--ink);letter-spacing:-.01em}
+.nav{display:flex;align-items:center;gap:22px}
+.nav a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:500}
+.nav a:hover{color:var(--green)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.lang button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+@media (max-width:720px){.nav .nav-link{display:none}}
+
+/* Hero */
+.hero{padding:72px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.2vw,4.6rem);line-height:1.02;letter-spacing:-.035em;margin:0 0 22px;font-weight:800}
+.hero .lead{font-size:clamp(1.15rem,2vw,1.35rem);line-height:1.5;max-width:34ch;margin:0 0 30px;color:var(--ink)}
+.hero .lead + p{color:var(--muted);max-width:52ch;margin:-12px 0 32px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:600;font-size:16px;padding:12px 20px;border-radius:10px;text-decoration:none;cursor:pointer;border:1.5px solid var(--ink)}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--green);border-color:var(--green)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
+@media (max-width:880px){.hero .wrap{grid-template-columns:1fr;gap:40px}.hero{padding:48px 0 64px}}
+
+/* Payment stub (signature element) */
+.stub{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:6px 6px 14px 14px;box-shadow:var(--shadow);padding:0 0 22px;max-width:420px;justify-self:end;width:100%}
+.stub::before{content:"";position:absolute;left:-1px;right:-1px;top:-9px;height:18px;background:radial-gradient(circle at 9px 9px,var(--paper) 5.5px,transparent 6px) 0 0/18px 18px repeat-x}
+.stub-head{display:flex;justify-content:space-between;align-items:baseline;padding:22px 24px 14px;border-bottom:1.5px dashed var(--line)}
+.stub-head strong{font-size:15px}
+.stub-head span{font-size:13px;color:var(--muted)}
+.stub-body{display:grid;grid-template-columns:112px 1fr;gap:18px;padding:20px 24px 6px;align-items:start}
+.img-slot{position:relative;overflow:hidden;background:var(--green-soft);border-radius:10px}
+.img-slot img{display:block;width:100%;height:100%;object-fit:cover}
+.img-slot .fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:var(--green);font-weight:700;font-size:15px;text-align:center;padding:10px}
+.img-slot.missing img{display:none}
+.img-slot.missing .fallback{display:flex}
+.stub-photo{width:112px;height:136px}
+.stub-photo .fallback{font-size:28px}
+.stub dl{margin:0;display:grid;gap:10px}
+.stub dt{font-size:12.5px;color:var(--muted);margin:0}
+.stub dd{margin:0;font-weight:600;font-size:15px;line-height:1.35}
+.stub-foot{margin:16px 24px 0;padding-top:14px;border-top:1.5px dashed var(--line);display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.stub-foot .path{font-weight:600}
+.stub-foot .status{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:600}
+.stub-foot .status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+@media (max-width:880px){.stub{justify-self:start}}
+
+/* Sections */
+section{scroll-margin-top:72px}
+.section{padding:88px 0;border-top:1px solid var(--line)}
+.section-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:56px}
+.section h2{font-size:clamp(2rem,4vw,2.9rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;font-weight:800}
+.section-intro p{color:var(--muted);margin:0;max-width:52ch}
+.intro-art{aspect-ratio:16/9;width:100%}
+@media (max-width:880px){.section-intro{grid-template-columns:1fr;gap:28px}.section{padding:64px 0}}
+
+/* Case studies */
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:52px;padding:56px 0;border-top:1px dashed var(--line)}
+.case:first-of-type{border-top:0;padding-top:0}
+.case-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tag{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--green-soft);color:var(--green)}
+.tag.plain{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.case h3{font-size:clamp(1.5rem,2.6vw,1.95rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 18px}
+.case h4{font-size:15px;margin:24px 0 6px;color:var(--ink)}
+.case p{margin:0 0 10px;max-width:60ch}
+.case ul{margin:6px 0 0;padding-left:20px}
+.case li{margin:0 0 8px}
+.case .note{font-size:14.5px;color:var(--muted);margin-top:18px}
+@media (max-width:960px){.case{grid-template-columns:1fr;gap:32px}}
+
+/* Demo frames */
+.demo{position:sticky;top:96px;align-self:start}
+.demo-label{font-size:13px;color:var(--muted);margin:0 0 10px;display:flex;justify-content:space-between;gap:12px}
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.frame-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.frame-bar b{color:var(--ink);font-weight:600}
+.frame-body{padding:18px}
+.phone{max-width:340px;margin:0 auto;border:1px solid var(--line);border-radius:34px;padding:12px;background:var(--surface);box-shadow:var(--shadow)}
+.phone-screen{border-radius:24px;border:1px solid var(--line);background:var(--paper);min-height:520px;padding:22px 18px;position:relative;overflow:hidden}
+.phone-notch{width:84px;height:6px;border-radius:6px;background:var(--line);margin:0 auto 16px}
+@media (max-width:960px){.demo{position:static}}
+
+/* Form controls inside demos */
+.field{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.field label,.field .k{color:var(--muted)}
+.field input[type="number"],.field select,.demo select,.demo input[type="text"],.demo input[type="email"],.demo input[type="password"]{font:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.field input[type="number"]{width:110px;text-align:right}
+.money{display:inline-flex;align-items:center;gap:4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:14px;border:0;background:var(--surface);color:var(--ink);padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.err{display:none;margin:8px 0 0;padding:8px 10px;border-radius:8px;background:var(--danger-soft);color:var(--danger);font-size:13.5px;line-height:1.4}
+.err.show{display:block}
+.summary{margin:14px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:14.5px}
+.summary ul{margin:6px 0 8px;padding-left:18px}
+.summary li{margin:2px 0}
+.dbtn{font:inherit;font-weight:600;font-size:15px;padding:10px 16px;border-radius:10px;border:0;background:var(--green);color:#fff;cursor:pointer;width:100%}
+@media (prefers-color-scheme: dark){.dbtn{color:#0E1513}}
+.dbtn:disabled{opacity:.4;cursor:not-allowed}
+.dbtn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.linkbtn{font:inherit;font-size:14px;background:none;border:0;color:var(--green);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+table.sched{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+table.sched th,table.sched td{padding:6px 6px;text-align:right;border-bottom:1px solid var(--line)}
+table.sched th{color:var(--muted);font-weight:600}
+table.sched th:first-child,table.sched td:first-child{text-align:left}
+
+/* Reminder table */
+table.events{width:100%;border-collapse:collapse;font-size:14px}
+table.events th{text-align:left;color:var(--muted);font-weight:600;padding:8px 6px;border-bottom:1px solid var(--line)}
+table.events td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+.chans{display:flex;flex-wrap:wrap;gap:4px 12px}
+.chans label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.chans input{accent-color:var(--green);width:16px;height:16px}
+.del{font:inherit;font-size:13.5px;background:none;border:0;color:var(--danger);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.del:disabled{color:var(--muted);opacity:.5;cursor:not-allowed;text-decoration:none}
+.events-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
+.events-foot .hint{font-size:13px;color:var(--muted)}
+.add{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:8px;padding:8px 14px;background:var(--ink);color:var(--paper);cursor:pointer}
+.add:disabled{opacity:.4;cursor:not-allowed}
+
+/* Inbox */
+.inbox-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap}
+.inbox-title{display:flex;align-items:center;gap:8px;font-weight:700}
+.badge{min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--danger);color:#fff;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.badge.zero{background:var(--line);color:var(--muted)}
+.case .msg-list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.case .msg-list li{margin:0}
+.msg-list li + li{border-top:1px solid var(--line)}
+.msg{width:100%;display:grid;grid-template-columns:10px 1fr auto;gap:10px;align-items:center;padding:11px 12px;background:var(--surface);border:0;font:inherit;color:var(--ink);text-align:left;cursor:pointer}
+.msg:hover{background:var(--green-soft)}
+.msg .dot{width:8px;height:8px;border-radius:50%;background:transparent}
+.msg.unread .dot{background:var(--green)}
+.msg.unread .subj{font-weight:700}
+.msg .who{font-size:13px;color:var(--muted)}
+.msg .subj{font-size:14.5px;display:block}
+.msg time{font-size:12.5px;color:var(--muted)}
+.empty{padding:22px;text-align:center;color:var(--muted);font-size:14px;background:var(--surface)}
+
+/* Sign-in phone screens */
+.screen{display:none}
+.screen.on{display:block}
+.screen h5{font-size:21px;line-height:1.2;margin:4px 0 8px;letter-spacing:-.01em}
+.screen p{font-size:14.5px;color:var(--muted);margin:0 0 18px}
+.avatar-chip{width:56px;height:56px;border-radius:50%;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;margin-bottom:14px}
+.code{display:flex;gap:6px;margin:0 0 8px}
+.code input{width:100%;min-width:0;text-align:center;font:inherit;font-size:20px;font-weight:700;padding:10px 0;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.stack{display:grid;gap:10px}
+.demo-hint{font-size:12.5px;color:var(--muted);margin:6px 0 14px}
+.bill-card{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px;margin:10px 0 18px}
+.bill-card .row{display:flex;justify-content:space-between;font-size:14.5px;padding:3px 0}
+.stack label{font-size:13px;color:var(--muted)}
+.stack input{width:100%}
+
+/* Process */
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.step{padding:26px 22px;border-left:1px solid var(--line)}
+.step:first-child{border-left:0}
+.step .n{font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;display:block}
+.step h3{font-size:19px;margin:0 0 8px;letter-spacing:-.01em}
+.step p{margin:0;font-size:15.5px;color:var(--muted)}
+@media (max-width:880px){.process{grid-template-columns:1fr 1fr}.step:nth-child(3){border-left:0}.step:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:560px){.process{grid-template-columns:1fr}.step{border-left:0}.step + .step{border-top:1px solid var(--line)}}
+
+/* About */
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:56px}
+.about p{max-width:62ch}
+.facts{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.facts li{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15.5px}
+.facts .k{color:var(--muted)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+@media (max-width:880px){.about{grid-template-columns:1fr;gap:36px}.facts li{grid-template-columns:120px 1fr}}
+
+/* Contact */
+.contact{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.contact-left{display:flex;align-items:center;gap:22px}
+.contact-avatar{width:88px;height:88px;border-radius:50%;flex:none}
+.contact-avatar img{border-radius:50%}
+.contact h2{margin-bottom:6px}
+.contact p{color:var(--muted);margin:0;max-width:46ch}
+footer{padding:28px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top">Hector Martínez</a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-link" href="#work"><span data-l="en">Work</span><span data-l="es">Proyectos</span></a>
+      <a class="nav-link" href="#process"><span data-l="en">How I work</span><span data-l="es">Cómo trabajo</span></a>
+      <a class="nav-link" href="#about"><span data-l="en">About</span><span data-l="es">Sobre mí</span></a>
+      <a class="nav-link" href="#contact"><span data-l="en">Contact</span><span data-l="es">Contacto</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">ES</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Hector Martínez</h1>
+      <p class="lead">
+        <span data-l="en">Product Manager who designs. I build billing and payment experiences for the businesses that send bills and the people who pay them.</span>
+        <span data-l="es">Product Manager que también diseña. Construyo experiencias de facturación y pago para las empresas que emiten facturas y para las personas que las pagan.</span>
+      </p>
+      <p>
+        <span data-l="en">At NexTrust I lead product work for BillFlash, a billing platform for service providers, and PayWoot, the portal where their payers view and pay bills.</span>
+        <span data-l="es">En NexTrust lidero el trabajo de producto de BillFlash, una plataforma de facturación para proveedores de servicios, y PayWoot, el portal donde sus clientes ven y pagan sus facturas.</span>
+      </p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#work"><span data-l="en">View case studies</span><span data-l="es">Ver casos de estudio</span></a>
+        <a class="btn btn-ghost" href="#contact"><span data-l="en">Get in touch</span><span data-l="es">Contactarme</span></a>
+      </div>
+    </div>
+
+    <aside class="stub" aria-label="Profile summary">
+      <div class="stub-head">
+        <strong><span data-l="en">Profile statement</span><span data-l="es">Estado de perfil</span></strong>
+        <span class="num">2026</span>
+      </div>
+      <div class="stub-body">
+        <div class="img-slot stub-photo">
+          <img src="assets/photo.jpg" alt="Hector Martínez" onerror="this.parentElement.classList.add('missing')">
+          <span class="fallback" aria-hidden="true">HM</span>
+        </div>
+        <dl>
+          <div><dt><span data-l="en">Role</span><span data-l="es">Cargo</span></dt><dd>Product Manager, NexTrust</dd></div>
+          <div><dt><span data-l="en">Products</span><span data-l="es">Productos</span></dt><dd>BillFlash (B2B), PayWoot (B2C)</dd></div>
+          <div><dt><span data-l="en">Languages</span><span data-l="es">Idiomas</span></dt><dd><span data-l="en">English and Spanish</span><span data-l="es">Inglés y español</span></dd></div>
+          <div><dt><span data-l="en">Based in</span><span data-l="es">Ubicación</span></dt><dd><span data-l="en">Ecuador, working remotely</span><span data-l="es">Ecuador, trabajo remoto</span></dd></div>
+        </dl>
+      </div>
+      <div class="stub-foot">
+        <span class="path"><span data-l="en">Teacher, then QA, then Product</span><span data-l="es">Docente, luego QA, luego Producto</span></span>
+        <span class="status"><span data-l="en">Active</span><span data-l="es">Activo</span></span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-intro">
+      <div>
+        <h2><span data-l="en">Selected work</span><span data-l="es">Proyectos seleccionados</span></h2>
+        <p>
+          <span data-l="en">A few projects from a larger body of work at NexTrust. Each one includes a small interactive demo. Interfaces are recreated with sample data, so no confidential material is shown.</span>
+          <span data-l="es">Algunos proyectos de un trabajo más amplio en NexTrust. Cada uno incluye una pequeña demo interactiva. Las interfaces están recreadas con datos de ejemplo, sin material confidencial.</span>
+        </p>
+      </div>
+      <div class="img-slot intro-art">
+        <img src="assets/prototyping.png" alt="" onerror="this.parentElement.classList.add('missing')">
+        <span class="fallback">assets/prototyping.png</span>
+      </div>
+    </div>
+
+    <!-- Case 1: PlanPay -->
+    <article class="case" id="planpay">
+      <div>
+        <div class="case-meta"><span class="tag">PayWoot</span><span class="tag">BillFlash</span><span class="tag plain"><span data-l="en">Shipped</span><span data-l="es">Lanzado</span></span></div>
+        <h3><span data-l="en">Letting payers build their own payment plans</span><span data-l="es">Permitir que los pagadores creen sus propios planes de pago</span></h3>
+        <h4><span data-l="en">The problem</span><span data-l="es">El problema</span></h4>
+        <p>
+          <span data-l="en">Payment plans could only be created by a biller's staff. Payers who couldn't pay in full had to call, which created support work and slowed down collections.</span>
+          <span data-l="es">Los planes de pago solo los podía crear el personal del biller. Quien no podía pagar el total tenía que llamar, lo que generaba trabajo de soporte y retrasaba los cobros.</span>
+        </p>
+        <h4><span data-l="en">Key decisions</span><span data-l="es">Decisiones clave</span></h4>
+        <ul>
+          <li><span data-l="en">Billers set the guardrails (minimum bill, minimum payment, maximum duration) and payers choose freely inside them.</span><span data-l="es">El biller define los límites (monto mínimo, pago mínimo, duración máxima) y el pagador elige libremente dentro de ellos.</span></li>
+          <li><span data-l="en">The payer picks an amount and the plan calculates the rest. The final payment absorbs any remainder, so totals always match.</span><span data-l="es">El pagador elige un monto y el plan calcula el resto. El último pago absorbe el saldo restante, así el total siempre cuadra.</span></li>
+          <li><span data-l="en">A plain-language summary before submitting, so nobody is surprised by a charge.</span><span data-l="es">Un resumen en lenguaje simple antes de confirmar, para que nadie se sorprenda con un cobro.</span></li>
+          <li><span data-l="en">Clear ownership across three systems: every plan is visible to billers, payers and collectors, but only whoever created it can edit or cancel it.</span><span data-l="es">Propiedad clara entre tres sistemas: todos ven los planes, pero solo quien lo creó puede editarlo o cancelarlo.</span></li>
+          <li><span data-l="en">A recovery path for declined payments: a notice at sign-in with options to retry or update the payment method.</span><span data-l="es">Un camino de recuperación para pagos rechazados: un aviso al iniciar sesión con opciones para reintentar o actualizar el método de pago.</span></li>
+        </ul>
+        <h4><span data-l="en">What came next</span><span data-l="es">Lo que vino después</span></h4>
+        <p>
+          <span data-l="en">A follow-up release added weekly plans and inline validation to the biller portal, aligning it with the payer experience to reduce configuration errors.</span>
+          <span data-l="es">Una segunda entrega agregó planes semanales y validaciones en línea al portal del biller, alineándolo con la experiencia del pagador para reducir errores de configuración.</span>
+        </p>
+        <p class="note"><span data-l="en">My role: discovery, requirements (BRD), Figma prototypes and leadership review, including rollout, onboarding and reporting recommendations.</span><span data-l="es">Mi rol: descubrimiento, requisitos (BRD), prototipos en Figma y revisión con liderazgo, incluyendo recomendaciones de lanzamiento, onboarding y reportes.</span></p>
+      </div>
+      <div class="demo">
+        <p class="demo-label"><span><span data-l="en">Try it: change the frequency or the amount</span><span data-l="es">Pruébalo: cambia la frecuencia o el monto</span></span></p>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <strong><span data-l="en">Set up your payment plan</span><span data-l="es">Configura tu plan de pago</span></strong>
+            <div class="field"><span class="k"><span data-l="en">Total due</span><span data-l="es">Total a pagar</span></span><b class="num" id="pp-total"></b></div>
+            <div class="field"><span class="k"><span data-l="en">Frequency</span><span data-l="es">Frecuencia</span></span>
+              <div class="seg" role="group" aria-label="Frequency">
+                <button type="button" data-freq="monthly" aria-pressed="true"><span data-l="en">Monthly</span><span data-l="es">Mensual</span></button>
+                <button type="button" data-freq="weekly" aria-pressed="false"><span data-l="en">Weekly</span><span data-l="es">Semanal</span></button>
+              </div>
+            </div>
+            <div class="field" id="pp-repeat-row" hidden><label for="pp-repeat"><span data-l="en">Repeat every</span><span data-l="es">Repetir cada</span></label>
+              <select id="pp-repeat"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select>
+            </div>
+            <div class="field"><label for="pp-amount"><span data-l="en">Payment amount</span><span data-l="es">Monto por pago</span></label>
+              <span class="money">$<input id="pp-amount" type="number" min="1" step="0.01" value="70.00" inputmode="decimal"></span>
+            </div>
+            <div class="field"><span class="k"><span data-l="en">Number of payments</span><span data-l="es">Número de pagos</span></span><b class="num" id="pp-count"></b></div>
+            <p class="err" id="pp-err" role="alert"></p>
+            <div class="summary" id="pp-summary" aria-live="polite"></div>
+            <button type="button" class="linkbtn" id="pp-toggle" aria-expanded="false"></button>
+            <div id="pp-sched" hidden></div>
+            <button type="button" class="dbtn" id="pp-continue" style="margin-top:14px"><span data-l="en">Continue to payment method</span><span data-l="es">Continuar al método de pago</span></button>
+            <p class="demo-hint" id="pp-rules"></p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 2: PayReminder -->
+    <article class="case" id="payreminder">
+      <div>
+        <div class="case-meta"><span class="tag">BillFlash</span><span class="tag plain"><span data-l="en">Shipped</span><span data-l="es">Lanzado</span></span></div>
+        <h3><span data-l="en">Giving billers control over payment reminders</span><span data-l="es">Dar a los billers control sobre los recordatorios de pago</span></h3>
+        <h4><span data-l="en">The problem</span><span data-l="es">El problema</span></h4>
+        <p>
+          <span data-l="en">Reminders followed a fixed pattern. Billers couldn't decide when, how often or through which channel their payers were reminded, even though every practice communicates differently.</span>
+          <span data-l="es">Los recordatorios seguían un patrón fijo. Los billers no podían decidir cuándo, con qué frecuencia ni por qué canal recordar a sus pagadores, aunque cada negocio se comunica distinto.</span>
+        </p>
+        <h4><span data-l="en">Key decisions</span><span data-l="es">Decisiones clave</span></h4>
+        <ul>
+          <li><span data-l="en">One table configures the whole sequence: days after the bill is approved and the channels for each reminder (email, text, mail, call).</span><span data-l="es">Una sola tabla configura toda la secuencia: los días después de aprobar la factura y los canales de cada recordatorio (email, texto, correo postal, llamada).</span></li>
+          <li><span data-l="en">Each reminder can only be scheduled after the previous one, so a sequence can't be set up out of order.</span><span data-l="es">Cada recordatorio solo puede programarse después del anterior, así la secuencia no puede quedar desordenada.</span></li>
+          <li><span data-l="en">Platform default templates that billers can customize per channel, with a one-click option to restore the default.</span><span data-l="es">Plantillas predeterminadas que el biller puede personalizar por canal, con la opción de restaurar la original con un clic.</span></li>
+          <li><span data-l="en">Activation at three levels (platform, reseller and biller) for a controlled, gradual rollout.</span><span data-l="es">Activación en tres niveles (plataforma, reseller y biller) para un lanzamiento controlado y gradual.</span></li>
+          <li><span data-l="en">Reminders can be stopped or resumed for a single bill or payer, with a confirmation that explains exactly what will change.</span><span data-l="es">Los recordatorios se pueden detener o reactivar para una factura o un pagador específico, con una confirmación que explica exactamente qué cambiará.</span></li>
+        </ul>
+        <p class="note"><span data-l="en">My role: problem definition, requirements, rollout model, UX for settings and monitoring views, and Figma prototypes.</span><span data-l="es">Mi rol: definición del problema, requisitos, modelo de lanzamiento, UX de configuración y monitoreo, y prototipos en Figma.</span></p>
+      </div>
+      <div class="demo">
+        <p class="demo-label"><span><span data-l="en">Try it: add, edit or remove reminders</span><span data-l="es">Pruébalo: agrega, edita o elimina recordatorios</span></span></p>
+        <div class="frame">
+          <div class="frame-bar"><b><span data-l="en">Reminder schedule</span><span data-l="es">Calendario de recordatorios</span></b><span><span data-l="en">Biller settings</span><span data-l="es">Configuración del biller</span></span></div>
+          <div class="frame-body">
+            <div style="overflow-x:auto">
+              <table class="events">
+                <thead><tr>
+                  <th><span data-l="en">Reminder</span><span data-l="es">Recordatorio</span></th>
+                  <th><span data-l="en">Send after</span><span data-l="es">Enviar a los</span></th>
+                  <th><span data-l="en">Channels</span><span data-l="es">Canales</span></th>
+                  <th><span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Actions</span></th>
+                </tr></thead>
+                <tbody id="ev-body"></tbody>
+              </table>
+            </div>
+            <div class="events-foot">
+              <span class="hint" id="ev-hint"></span>
+              <button type="button" class="add" id="ev-add"><span data-l="en">Add reminder</span><span data-l="es">Agregar recordatorio</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 3: Payer Messages -->
+    <article class="case" id="messages">
+      <div>
+        <div class="case-meta"><span class="tag">BillFlash</span><span class="tag">PayWoot</span><span class="tag plain"><span data-l="en">Shipped</span><span data-l="es">Lanzado</span></span></div>
+        <h3><span data-l="en">Bringing biller and payer conversations into the product</span><span data-l="es">Llevar las conversaciones entre biller y pagador al producto</span></h3>
+        <h4><span data-l="en">The problem</span><span data-l="es">El problema</span></h4>
+        <p>
+          <span data-l="en">Questions about bills happened by email and phone, outside the platform. Messages got lost, there was no shared history, and nobody could trace what had been agreed.</span>
+          <span data-l="es">Las preguntas sobre facturas ocurrían por email y teléfono, fuera de la plataforma. Los mensajes se perdían, no había historial compartido y nadie podía rastrear lo acordado.</span>
+        </p>
+        <h4><span data-l="en">Key decisions</span><span data-l="es">Decisiones clave</span></h4>
+        <ul>
+          <li><span data-l="en">Two-way messaging tied to each account, so every conversation lives next to the bill it's about.</span><span data-l="es">Mensajería bidireccional vinculada a cada cuenta, para que cada conversación viva junto a la factura correspondiente.</span></li>
+          <li><span data-l="en">An unread counter in the main navigation, so new messages are never missed.</span><span data-l="es">Un contador de no leídos en la navegación principal, para no perder ningún mensaje nuevo.</span></li>
+          <li><span data-l="en">Search by account, name, date range or subject, plus sent, saved and deleted folders.</span><span data-l="es">Búsqueda por cuenta, nombre, rango de fechas o asunto, y carpetas de enviados, guardados y eliminados.</span></li>
+          <li><span data-l="en">The first module built on BillFlash's new design system, setting the visual patterns for the rest of the redesign.</span><span data-l="es">El primer módulo construido con el nuevo sistema de diseño de BillFlash, que marcó los patrones visuales para el resto del rediseño.</span></li>
+        </ul>
+        <p class="note"><span data-l="en">Part of an ongoing redesign of BillFlash, delivered feature by feature so customers get value early.</span><span data-l="es">Parte del rediseño continuo de BillFlash, entregado por funcionalidades para que los clientes reciban valor desde el inicio.</span></p>
+      </div>
+      <div class="demo">
+        <p class="demo-label"><span><span data-l="en">Try it: open a message or filter unread</span><span data-l="es">Pruébalo: abre un mensaje o filtra no leídos</span></span></p>
+        <div class="frame">
+          <div class="frame-bar"><b><span data-l="en">Payer messages</span><span data-l="es">Mensajes de pagadores</span></b><span><span data-l="en">Inbox</span><span data-l="es">Bandeja de entrada</span></span></div>
+          <div class="frame-body">
+            <div class="inbox-top">
+              <span class="inbox-title"><span data-l="en">Inbox</span><span data-l="es">Bandeja</span> <span class="badge num" id="msg-badge"></span></span>
+              <div class="seg" role="group" aria-label="Filter">
+                <button type="button" data-filter="all" aria-pressed="true"><span data-l="en">All</span><span data-l="es">Todos</span></button>
+                <button type="button" data-filter="unread" aria-pressed="false"><span data-l="en">Unread</span><span data-l="es">No leídos</span></button>
+              </div>
+            </div>
+            <ul class="msg-list" id="msg-list"></ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 4: Sign-in -->
+    <article class="case" id="signin">
+      <div>
+        <div class="case-meta"><span class="tag">PayWoot</span><span class="tag plain"><span data-l="en">Concept</span><span data-l="es">Concepto</span></span></div>
+        <h3><span data-l="en">Rethinking sign-in for payers who never made an account</span><span data-l="es">Repensar el inicio de sesión para pagadores que nunca crearon una cuenta</span></h3>
+        <h4><span data-l="en">The discovery</span><span data-l="es">El hallazgo</span></h4>
+        <p>
+          <span data-l="en">The original brief was to simplify login. Usage data showed most payers checked out as guests, so a better login form wouldn't help most people. I reframed the problem: reduce the friction of having and using an account at all.</span>
+          <span data-l="es">El pedido inicial era simplificar el login. Los datos de uso mostraron que la mayoría pagaba como invitado, así que un mejor formulario no ayudaría a casi nadie. Replanteé el problema: reducir la fricción de tener y usar una cuenta.</span>
+        </p>
+        <h4><span data-l="en">Key decisions</span><span data-l="es">Decisiones clave</span></h4>
+        <ul>
+          <li><span data-l="en">Focus on payers arriving from an eBill email, where the system already knows who they are.</span><span data-l="es">Enfocarse en quienes llegan desde un email de eBill, donde el sistema ya sabe quiénes son.</span></li>
+          <li><span data-l="en">Replace the blank email and password form with a recognition screen and a one-time code. No password to create or forget.</span><span data-l="es">Reemplazar el formulario vacío de email y contraseña por una pantalla de reconocimiento y un código de un solo uso. Sin contraseñas que crear ni olvidar.</span></li>
+          <li><span data-l="en">Keep a clear way out when the recognition is wrong.</span><span data-l="es">Mantener una salida clara cuando el reconocimiento es incorrecto.</span></li>
+        </ul>
+        <p class="note"><span data-l="en">Status: concept prototyped and presented to sponsors.</span><span data-l="es">Estado: concepto prototipado y presentado a sponsors.</span></p>
+      </div>
+      <div class="demo">
+        <p class="demo-label"><span><span data-l="en">Try it: walk through the flow</span><span data-l="es">Pruébalo: recorre el flujo</span></span></p>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="screen on" data-screen="recognize">
+              <div class="avatar-chip">H</div>
+              <h5><span data-l="en">Welcome back, Hector</span><span data-l="es">Hola de nuevo, Hector</span></h5>
+              <p><span data-l="en">You came from your eBill email, so we'll send a quick code instead of asking for a password.</span><span data-l="es">Llegaste desde tu email de eBill, así que te enviaremos un código rápido en lugar de pedirte una contraseña.</span></p>
+              <div class="stack">
+                <button type="button" class="dbtn" data-go="code"><span data-l="en">Continue as Hector</span><span data-l="es">Continuar como Hector</span></button>
+                <button type="button" class="linkbtn" data-go="fallback"><span data-l="en">Not you? Sign in another way</span><span data-l="es">¿No eres tú? Inicia sesión de otra forma</span></button>
+              </div>
+            </div>
+            <div class="screen" data-screen="code">
+              <h5><span data-l="en">Enter your code</span><span data-l="es">Ingresa tu código</span></h5>
+              <p><span data-l="en">We sent a 6-digit code to h•••@email.com</span><span data-l="es">Enviamos un código de 6 dígitos a h•••@email.com</span></p>
+              <div class="code" id="code-inputs">
+                <input inputmode="numeric" maxlength="1" aria-label="Digit 1"><input inputmode="numeric" maxlength="1" aria-label="Digit 2"><input inputmode="numeric" maxlength="1" aria-label="Digit 3"><input inputmode="numeric" maxlength="1" aria-label="Digit 4"><input inputmode="numeric" maxlength="1" aria-label="Digit 5"><input inputmode="numeric" maxlength="1" aria-label="Digit 6">
+              </div>
+              <p class="demo-hint"><span data-l="en">Demo: any 6 digits work.</span><span data-l="es">Demo: cualquier combinación de 6 dígitos funciona.</span></p>
+              <div class="stack">
+                <button type="button" class="dbtn" id="code-verify" disabled><span data-l="en">Verify and continue</span><span data-l="es">Verificar y continuar</span></button>
+                <button type="button" class="linkbtn" data-go="recognize"><span data-l="en">Back</span><span data-l="es">Volver</span></button>
+              </div>
+            </div>
+            <div class="screen" data-screen="done">
+              <h5><span data-l="en">You're signed in</span><span data-l="es">Sesión iniciada</span></h5>
+              <p><span data-l="en">No password created, nothing to remember.</span><span data-l="es">Sin crear contraseña, nada que recordar.</span></p>
+              <div class="bill-card">
+                <div class="row"><span><span data-l="en">Current bill</span><span data-l="es">Factura actual</span></span><b class="num">$95.00</b></div>
+                <div class="row"><span><span data-l="en">Due date</span><span data-l="es">Vencimiento</span></span><span class="num">06/30/2026</span></div>
+              </div>
+              <div class="stack">
+                <button type="button" class="dbtn"><span data-l="en">Pay bill</span><span data-l="es">Pagar factura</span></button>
+                <button type="button" class="linkbtn" data-go="recognize"><span data-l="en">Restart demo</span><span data-l="es">Reiniciar demo</span></button>
+              </div>
+            </div>
+            <div class="screen" data-screen="fallback">
+              <h5><span data-l="en">Sign in</span><span data-l="es">Iniciar sesión</span></h5>
+              <p><span data-l="en">The standard form stays available as a fallback.</span><span data-l="es">El formulario estándar sigue disponible como alternativa.</span></p>
+              <div class="stack">
+                <label for="fb-email">Email</label><input id="fb-email" type="email" placeholder="name@email.com">
+                <label for="fb-pass"><span data-l="en">Password</span><span data-l="es">Contraseña</span></label><input id="fb-pass" type="password">
+                <button type="button" class="dbtn" style="margin-top:6px"><span data-l="en">Sign in</span><span data-l="es">Iniciar sesión</span></button>
+                <button type="button" class="linkbtn" data-go="recognize"><span data-l="en">Back</span><span data-l="es">Volver</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="section-intro">
+      <div>
+        <h2><span data-l="en">How I work</span><span data-l="es">Cómo trabajo</span></h2>
+        <p>
+          <span data-l="en">The same loop on every project, from a vague request to something shipped.</span>
+          <span data-l="es">El mismo ciclo en cada proyecto, desde un pedido difuso hasta algo lanzado.</span>
+        </p>
+      </div>
+      <div class="img-slot intro-art" style="aspect-ratio:4/3">
+        <img src="assets/how-i-work.png" alt="" onerror="this.parentElement.classList.add('missing')">
+        <span class="fallback">assets/how-i-work.png</span>
+      </div>
+    </div>
+    <div class="process">
+      <div class="step"><span class="n">1</span>
+        <h3><span data-l="en">Discover</span><span data-l="es">Descubrir</span></h3>
+        <p><span data-l="en">I look at real usage before proposing anything, and reframe the problem when the data says so.</span><span data-l="es">Reviso el uso real antes de proponer nada, y replanteo el problema cuando los datos lo indican.</span></p></div>
+      <div class="step"><span class="n">2</span>
+        <h3><span data-l="en">Define</span><span data-l="es">Definir</span></h3>
+        <p><span data-l="en">I write BRDs that engineering, design and leadership can align on, including the edge cases.</span><span data-l="es">Escribo BRDs en los que ingeniería, diseño y liderazgo pueden alinearse, incluyendo los casos límite.</span></p></div>
+      <div class="step"><span class="n">3</span>
+        <h3><span data-l="en">Prototype</span><span data-l="es">Prototipar</span></h3>
+        <p><span data-l="en">I build interactive prototypes in Figma, and with AI tools like Claude, so people react to something real.</span><span data-l="es">Construyo prototipos interactivos en Figma, y con herramientas de IA como Claude, para que la gente reaccione a algo real.</span></p></div>
+      <div class="step"><span class="n">4</span>
+        <h3><span data-l="en">Ship</span><span data-l="es">Lanzar</span></h3>
+        <p><span data-l="en">I deliver incrementally in Scrum, feature by feature, with distributed teams in English and Spanish.</span><span data-l="es">Entrego de forma incremental en Scrum, funcionalidad por funcionalidad, con equipos distribuidos en inglés y español.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap about">
+    <div>
+      <h2><span data-l="en">About me</span><span data-l="es">Sobre mí</span></h2>
+      <p><span data-l="en">I didn't start in tech. I spent over seven years as a teacher and trainer in Ecuador, where I was named Teacher of the Year twice and led a student program in China. Teaching taught me to explain complex ideas simply and to listen before proposing.</span><span data-l="es">No empecé en tecnología. Fui docente y capacitador por más de siete años en Ecuador, donde me nombraron Docente del Año dos veces y coordiné un programa estudiantil en China. La docencia me enseñó a explicar ideas complejas de forma simple y a escuchar antes de proponer.</span></p>
+      <p><span data-l="en">I joined NexTrust in QA and spent almost four years testing billing and payment products. That's where I learned to think in edge cases and real user behavior. In 2025 I moved into product management, and now I lead product work across BillFlash and PayWoot.</span><span data-l="es">Entré a NexTrust en QA y pasé casi cuatro años probando productos de facturación y pagos. Ahí aprendí a pensar en casos límite y en el comportamiento real de los usuarios. En 2025 pasé a Product Management, y hoy lidero el trabajo de producto de BillFlash y PayWoot.</span></p>
+      <div class="tools">
+        <span class="tag plain">Figma</span><span class="tag plain">Scrum</span><span class="tag plain">Scrumwise</span><span class="tag plain">Claude</span><span class="tag plain">BRDs</span><span class="tag plain"><span data-l="en">Prototyping</span><span data-l="es">Prototipado</span></span><span class="tag plain">HTML/CSS</span>
+      </div>
+    </div>
+    <ul class="facts">
+      <li><span class="k"><span data-l="en">Now</span><span data-l="es">Ahora</span></span><span>Product Manager, NexTrust (2025 –)</span></li>
+      <li><span class="k"><span data-l="en">Before</span><span data-l="es">Antes</span></span><span>QA Assistant, NexTrust (2021 – 2025)</span></li>
+      <li><span class="k"><span data-l="en">Earlier</span><span data-l="es">Inicios</span></span><span><span data-l="en">Teacher and trainer (2013 – 2020)</span><span data-l="es">Docente y capacitador (2013 – 2020)</span></span></li>
+      <li><span class="k"><span data-l="en">Education</span><span data-l="es">Educación</span></span><span><span data-l="en">Business Management, BYU-Idaho. Master's in Marketing and Web Analytics.</span><span data-l="es">Business Management, BYU-Idaho. Máster en Marketing y Analítica Web.</span></span></li>
+      <li><span class="k"><span data-l="en">Recognition</span><span data-l="es">Reconocimientos</span></span><span><span data-l="en">Teacher of the Year, 2015 and 2016</span><span data-l="es">Docente del Año, 2015 y 2016</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap contact">
+    <div class="contact-left">
+      <div class="img-slot contact-avatar">
+        <img src="assets/avatar.png" alt="" onerror="this.parentElement.classList.add('missing')">
+        <span class="fallback" aria-hidden="true">HM</span>
+      </div>
+      <div>
+        <h2><span data-l="en">Let's talk</span><span data-l="es">Conversemos</span></h2>
+        <p><span data-l="en">I'm always happy to connect with people building in fintech, payments and SaaS.</span><span data-l="es">Siempre me alegra conectar con personas que construyen en fintech, pagos y SaaS.</span></p>
+      </div>
+    </div>
+    <div class="btns">
+      <a class="btn btn-primary" id="email-link" href="#"><span data-l="en">Send an email</span><span data-l="es">Enviar un email</span></a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/hector-martinez-ec/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hector Martínez</span>
+    <span><span data-l="en">Interfaces recreated with sample data.</span><span data-l="es">Interfaces recreadas con datos de ejemplo.</span></span>
+  </div>
+</footer>
+<script>
+/* ===== Settings: change your email here ===== */
+const EMAIL = "feny9one@yahoo.com";
+
+(function(){
+  const root = document.documentElement;
+  let lang = "en";
+  const fmt = n => "$" + n.toFixed(2);
+  const T = (en, es) => lang === "es" ? es : en;
+
+  document.getElementById("email-link").href = "mailto:" + EMAIL;
+
+  /* ---------- Language ---------- */
+  function setLang(l){
+    lang = l;
+    root.lang = l; root.dataset.lang = l;
+    document.querySelectorAll("[data-set-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.setLang === l)));
+    renderPlan(); renderEvents(); renderInbox();
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.setLang)));
+
+  /* ---------- PlanPay calculator ---------- */
+  const PP = { total:220.25, minMonthly:50, minWeekly:15, maxMonths:6, maxWeeks:26, freq:"monthly" };
+  const amountEl = document.getElementById("pp-amount");
+  const repeatEl = document.getElementById("pp-repeat");
+  const repeatRow = document.getElementById("pp-repeat-row");
+  const schedEl = document.getElementById("pp-sched");
+  const toggleEl = document.getElementById("pp-toggle");
+  let schedOpen = false;
+
+  document.querySelectorAll("[data-freq]").forEach(b => b.addEventListener("click", () => {
+    PP.freq = b.dataset.freq;
+    document.querySelectorAll("[data-freq]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    repeatRow.hidden = PP.freq !== "weekly";
+    amountEl.value = PP.freq === "weekly" ? "35.00" : "70.00";
+    renderPlan();
+  }));
+  amountEl.addEventListener("input", renderPlan);
+  repeatEl.addEventListener("change", renderPlan);
+  toggleEl.addEventListener("click", () => { schedOpen = !schedOpen; renderPlan(); });
+
+  function addMonths(d, m){ const x = new Date(d); x.setMonth(x.getMonth() + m); return x; }
+  function addDays(d, n){ const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+  function dateStr(d){ return d.toLocaleDateString(lang === "es" ? "es-EC" : "en-US", {month:"short", day:"numeric", year:"numeric"}); }
+
+  function renderPlan(){
+    const amt = Math.round((parseFloat(amountEl.value) || 0) * 100) / 100;
+    const weekly = PP.freq === "weekly";
+    const every = parseInt(repeatEl.value, 10);
+    const min = weekly ? PP.minWeekly : PP.minMonthly;
+    document.getElementById("pp-total").textContent = fmt(PP.total);
+
+    let error = "";
+    let n = 0, last = 0;
+    if (amt >= PP.total) { n = 1; last = PP.total; }
+    else if (amt > 0) {
+      n = Math.ceil(PP.total / amt - 1e-9);
+      last = Math.round((PP.total - amt * (n - 1)) * 100) / 100;
+    }
+    if (amt < min) {
+      error = weekly
+        ? T(`The minimum weekly payment is ${fmt(min)}. Enter at least that amount.`, `El pago semanal mínimo es ${fmt(min)}. Ingresa al menos ese monto.`)
+        : T(`The minimum monthly payment is ${fmt(min)}. Enter at least that amount.`, `El pago mensual mínimo es ${fmt(min)}. Ingresa al menos ese monto.`);
+    } else if (!weekly && n > PP.maxMonths) {
+      error = T(`This plan would run longer than ${PP.maxMonths} months. Increase the payment amount.`, `Este plan duraría más de ${PP.maxMonths} meses. Aumenta el monto por pago.`);
+    } else if (weekly && n * every > PP.maxWeeks) {
+      error = T(`This plan would run longer than ${PP.maxWeeks} weeks. Increase the amount or pay more often.`, `Este plan duraría más de ${PP.maxWeeks} semanas. Aumenta el monto o paga con más frecuencia.`);
+    }
+
+    const errEl = document.getElementById("pp-err");
+    errEl.textContent = error; errEl.classList.toggle("show", !!error);
+    document.getElementById("pp-continue").disabled = !!error;
+    document.getElementById("pp-count").textContent = error && amt < min ? "–" : String(n);
+
+    const sum = document.getElementById("pp-summary");
+    if (error) {
+      sum.innerHTML = `<span style="color:var(--muted)">${T("Fix the highlighted value to see your plan.", "Corrige el valor indicado para ver tu plan.")}</span>`;
+    } else if (n === 1) {
+      sum.innerHTML = `${T("This plan includes:", "Este plan incluye:")}<ul><li>${T(fmt(PP.total) + " charged today", fmt(PP.total) + " cobrado hoy")}</li></ul><b>${T("Total", "Total")}: ${fmt(PP.total)}</b>`;
+    } else {
+      const evenEnd = Math.abs(last - amt) < 0.005;
+      const middle = evenEnd ? n - 1 : n - 2;
+      const interval = weekly
+        ? T(`every ${every} week${every > 1 ? "s" : ""}`, `cada ${every} semana${every > 1 ? "s" : ""}`)
+        : "";
+      let items = `<li>${T(fmt(amt) + " charged today", fmt(amt) + " cobrado hoy")}</li>`;
+      if (middle > 0) items += weekly
+        ? `<li>${T(`${middle} automatic payment${middle > 1 ? "s" : ""} of ${fmt(amt)} ${interval}`, `${middle} pago${middle > 1 ? "s" : ""} automático${middle > 1 ? "s" : ""} de ${fmt(amt)} ${interval}`)}</li>`
+        : `<li>${T(`${middle} automatic monthly payment${middle > 1 ? "s" : ""} of ${fmt(amt)}`, `${middle} pago${middle > 1 ? "s" : ""} automático${middle > 1 ? "s" : ""} mensual${middle > 1 ? "es" : ""} de ${fmt(amt)}`)}</li>`;
+      if (!evenEnd) items += `<li>${T("A final payment of " + fmt(last), "Un pago final de " + fmt(last))}</li>`;
+      sum.innerHTML = `${T("This plan includes:", "Este plan incluye:")}<ul>${items}</ul><b>${T("Total", "Total")}: ${fmt(PP.total)}</b>`;
+    }
+
+    toggleEl.hidden = !!error;
+    toggleEl.setAttribute("aria-expanded", String(schedOpen));
+    toggleEl.textContent = schedOpen ? T("Hide payment schedule", "Ocultar calendario de pagos") : T("View payment schedule", "Ver calendario de pagos");
+    schedEl.hidden = !schedOpen || !!error;
+    if (schedOpen && !error) {
+      let bal = PP.total, rows = "";
+      const today = new Date();
+      for (let i = 0; i < n; i++) {
+        const pay = i === n - 1 ? bal : amt;
+        const d = weekly ? addDays(today, i * 7 * every) : addMonths(today, i);
+        const rem = Math.round((bal - pay) * 100) / 100;
+        rows += `<tr><td class="num">${i + 1}</td><td>${dateStr(d)}</td><td class="num">${fmt(pay)}</td><td class="num">${fmt(Math.max(rem, 0))}</td></tr>`;
+        bal = rem;
+      }
+      schedEl.innerHTML = `<table class="sched"><thead><tr><th>#</th><th>${T("Due", "Fecha")}</th><th>${T("Payment", "Pago")}</th><th>${T("Remaining", "Saldo")}</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+    document.getElementById("pp-rules").textContent = weekly
+      ? T(`Biller rules in this demo: minimum ${fmt(PP.minWeekly)} per weekly payment, up to ${PP.maxWeeks} weeks.`, `Reglas del biller en esta demo: mínimo ${fmt(PP.minWeekly)} por pago semanal, hasta ${PP.maxWeeks} semanas.`)
+      : T(`Biller rules in this demo: minimum ${fmt(PP.minMonthly)} per monthly payment, up to ${PP.maxMonths} months.`, `Reglas del biller en esta demo: mínimo ${fmt(PP.minMonthly)} por pago mensual, hasta ${PP.maxMonths} meses.`);
+  }
+
+  /* ---------- PayReminder schedule ---------- */
+  const CH = [["email","Email","Email"],["text","Text","Texto"],["mail","Mail","Correo"],["call","Call","Llamada"]];
+  const MAX_EVENTS = 5;
+  let events = [
+    { day:0,  ch:{email:true, text:true, mail:false, call:false} },
+    { day:14, ch:{email:true, text:false, mail:false, call:false} },
+    { day:21, ch:{email:true, text:false, mail:true,  call:false} }
+  ];
+  const evBody = document.getElementById("ev-body");
+  const evAdd = document.getElementById("ev-add");
+
+  function ordinal(i){
+    if (lang === "es") return `${i}.º`;
+    const s = ["th","st","nd","rd"], v = i % 100;
+    return i + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
+  function dayLabel(d){ return d === 0 ? T("On approval", "Al aprobar") : T(`${d} day${d > 1 ? "s" : ""}`, `${d} día${d > 1 ? "s" : ""}`); }
+
+  function normalize(){
+    for (let i = 1; i < events.length; i++) {
+      if (events[i].day <= events[i - 1].day) events[i].day = events[i - 1].day + 1;
+    }
+    events = events.filter(e => e.day <= 30);
+    if (!events.length) events.push({ day:0, ch:{email:true, text:false, mail:false, call:false} });
+  }
+
+  function renderEvents(){
+    normalize();
+    evBody.innerHTML = "";
+    events.forEach((ev, i) => {
+      const minDay = i === 0 ? 0 : events[i - 1].day + 1;
+      const maxDay = 30 - (events.length - 1 - i);
+      let opts = "";
+      for (let d = minDay; d <= maxDay; d++) opts += `<option value="${d}" ${d === ev.day ? "selected" : ""}>${dayLabel(d)}</option>`;
+      const chans = CH.map(([k, en, es]) => `<label><input type="checkbox" data-i="${i}" data-ch="${k}" ${ev.ch[k] ? "checked" : ""}>${T(en, es)}</label>`).join("");
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td><b>${ordinal(i + 1)}</b></td>
+        <td><select data-i="${i}" aria-label="${T("Days after approval", "Días después de aprobar")}">${opts}</select></td>
+        <td><div class="chans">${chans}</div></td>
+        <td><button type="button" class="del" data-del="${i}" ${events.length === 1 ? "disabled" : ""}>${T("Delete", "Eliminar")}</button></td>`;
+      evBody.appendChild(tr);
+    });
+    const lastDay = events[events.length - 1].day;
+    evAdd.disabled = events.length >= MAX_EVENTS || lastDay >= 30;
+    document.getElementById("ev-hint").textContent = evAdd.disabled
+      ? T("Limit reached for this demo.", "Límite alcanzado en esta demo.")
+      : T("Each reminder must come after the previous one.", "Cada recordatorio debe ir después del anterior.");
+  }
+  evBody.addEventListener("change", e => {
+    const i = +e.target.dataset.i;
+    if (e.target.tagName === "SELECT") { events[i].day = +e.target.value; renderEvents(); }
+    else if (e.target.dataset.ch) {
+      events[i].ch[e.target.dataset.ch] = e.target.checked;
+      if (!Object.values(events[i].ch).some(Boolean)) { events[i].ch.email = true; renderEvents(); }
+    }
+  });
+  evBody.addEventListener("click", e => {
+    if (e.target.dataset.del !== undefined) { events.splice(+e.target.dataset.del, 1); renderEvents(); }
+  });
+  evAdd.addEventListener("click", () => {
+    const lastDay = events[events.length - 1].day;
+    events.push({ day:Math.min(lastDay + 7, 30), ch:{email:true, text:false, mail:false, call:false} });
+    renderEvents();
+  });
+
+  /* ---------- Payer Messages inbox ---------- */
+  let filter = "all";
+  const msgs = [
+    { who:"Ana Torres", acc:"ACC-1042", en:"Question about my March statement", es:"Consulta sobre mi estado de cuenta de marzo", t:"9:41", unread:true },
+    { who:"Luis Benítez", acc:"ACC-2210", en:"Can I change my payment date?", es:"¿Puedo cambiar mi fecha de pago?", t:"8:15", unread:true },
+    { who:"Mary Collins", acc:"ACC-0877", en:"Insurance adjustment on my bill", es:"Ajuste del seguro en mi factura", t:"Mon", tes:"lun", unread:true },
+    { who:"John Park", acc:"ACC-3301", en:"Receipt for my last payment", es:"Recibo de mi último pago", t:"Mon", tes:"lun", unread:false },
+    { who:"Sofía Ramos", acc:"ACC-1519", en:"Updated mailing address", es:"Dirección postal actualizada", t:"Fri", tes:"vie", unread:false }
+  ];
+  const list = document.getElementById("msg-list");
+  document.querySelectorAll("[data-filter]").forEach(b => b.addEventListener("click", () => {
+    filter = b.dataset.filter;
+    document.querySelectorAll("[data-filter]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    renderInbox();
+  }));
+  function renderInbox(){
+    const unread = msgs.filter(m => m.unread).length;
+    const badge = document.getElementById("msg-badge");
+    badge.textContent = unread; badge.classList.toggle("zero", unread === 0);
+    badge.setAttribute("aria-label", T(`${unread} unread`, `${unread} sin leer`));
+    const shown = msgs.map((m, i) => ({ m, i })).filter(x => filter === "all" || x.m.unread);
+    if (!shown.length) {
+      list.innerHTML = `<li class="empty">${T("You're all caught up. New payer messages will appear here.", "Estás al día. Los mensajes nuevos de pagadores aparecerán aquí.")}</li>`;
+      return;
+    }
+    list.innerHTML = shown.map(({ m, i }) => `<li><button type="button" class="msg ${m.unread ? "unread" : ""}" data-m="${i}">
+      <span class="dot" aria-hidden="true"></span>
+      <span><span class="subj">${T(m.en, m.es)}</span><span class="who">${m.who}, ${m.acc}${m.unread ? T(" (unread)", " (sin leer)") : ""}</span></span>
+      <time>${lang === "es" && m.tes ? m.tes : m.t}</time></button></li>`).join("");
+  }
+  list.addEventListener("click", e => {
+    const b = e.target.closest("[data-m]");
+    if (!b) return;
+    msgs[+b.dataset.m].unread = false;
+    renderInbox();
+  });
+
+  /* ---------- Sign-in flow ---------- */
+  const screens = document.querySelectorAll("[data-screen]");
+  const codeInputs = [...document.querySelectorAll("#code-inputs input")];
+  const verify = document.getElementById("code-verify");
+  function go(name){
+    screens.forEach(s => s.classList.toggle("on", s.dataset.screen === name));
+    if (name === "code") { codeInputs.forEach(i => i.value = ""); verify.disabled = true; setTimeout(() => codeInputs[0].focus(), 30); }
+  }
+  document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => go(b.dataset.go)));
+  codeInputs.forEach((inp, idx) => {
+    inp.addEventListener("input", () => {
+      inp.value = inp.value.replace(/\D/g, "").slice(0, 1);
+      if (inp.value && idx < codeInputs.length - 1) codeInputs[idx + 1].focus();
+      verify.disabled = !codeInputs.every(i => i.value);
+    });
+    inp.addEventListener("keydown", e => { if (e.key === "Backspace" && !inp.value && idx > 0) codeInputs[idx - 1].focus(); });
+  });
+  verify.addEventListener("click", () => go("done"));
+
+  /* ---------- Start ---------- */
+  const preferred = (navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en";
+  setLang(preferred);
+})();
+</script>
+</body>
+</html>

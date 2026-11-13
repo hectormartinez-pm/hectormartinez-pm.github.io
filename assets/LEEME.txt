@@ -1,0 +1,10 @@
+Coloca tus imagenes en esta carpeta con estos nombres exactos:
+
+  photo.jpg        Tu foto real (1:1 o 4:5, minimo 1200 px)        -> portada
+  avatar.png       Avatar ilustrado (1:1, 1024 x 1024)             -> icono del sitio y contacto
+  prototyping.png  Ilustracion de prototipado (16:9, 1600 x 900)   -> "Proyectos seleccionados"
+  how-i-work.png   Ilustracion de la pizarra (4:3, 1600 x 1200)    -> "Como trabajo"
+
+og-image.png ya esta creada (imagen al compartir el enlace).
+Si falta alguna imagen, el sitio muestra un espacio de color en su lugar.
+Puedes borrar este archivo antes de subir.
