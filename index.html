@@ -7,7 +7,7 @@
 <meta name="description" content="Product Manager for billing and payment platforms. Case studies from BillFlash and PayWoot.">
 <meta property="og:title" content="Hector Martínez | Product Manager">
 <meta property="og:description" content="Product Manager for billing and payment platforms. Discovery, UX design and agile delivery.">
-<meta property="og:image" content="assets/og-image.png">
+<meta property="og:image" content="https://hectormartinez-pm.github.io/assets/og-image.png">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/avatar.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,6 +178,21 @@ table.events td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-ali
 .msg .subj{font-size:14.5px;display:block}
 .msg time{font-size:12.5px;color:var(--muted)}
 .empty{padding:22px;text-align:center;color:var(--muted);font-size:14px;background:var(--surface)}
+
+
+/* Message detail */
+.mv-back{margin-bottom:10px}
+.mv-subj{font-size:17px;font-weight:700;margin:0 0 4px;line-height:1.3}
+.mv-meta{font-size:13px;color:var(--muted);margin:0 0 14px}
+.thread{display:grid;gap:10px;margin-bottom:14px}
+.bubble{max-width:88%;padding:10px 12px;border-radius:12px;font-size:14.5px;line-height:1.45;border:1px solid var(--line);background:var(--surface)}
+.bubble .from{display:block;font-size:12px;color:var(--muted);margin-bottom:3px;font-weight:600}
+.bubble.me{justify-self:end;background:var(--green-soft);border-color:transparent}
+.reply label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+.reply textarea{width:100%;min-height:72px;resize:vertical;font:inherit;font-size:14.5px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.reply-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+.reply-row .ok{font-size:13px;color:var(--green);font-weight:600}
+.reply-row .dbtn{width:auto}
 
 /* Sign-in phone screens */
 .screen{display:none}
@@ -422,10 +437,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p class="note"><span data-l="en">Part of an ongoing redesign of BillFlash, delivered feature by feature so customers get value early.</span><span data-l="es">Parte del rediseño continuo de BillFlash, entregado por funcionalidades para que los clientes reciban valor desde el inicio.</span></p>
       </div>
       <div class="demo">
-        <p class="demo-label"><span><span data-l="en">Try it: open a message or filter unread</span><span data-l="es">Pruébalo: abre un mensaje o filtra no leídos</span></span></p>
+        <p class="demo-label"><span><span data-l="en">Try it: open a message and reply, or filter unread</span><span data-l="es">Pruébalo: abre un mensaje y responde, o filtra no leídos</span></span></p>
         <div class="frame">
           <div class="frame-bar"><b><span data-l="en">Payer messages</span><span data-l="es">Mensajes de pagadores</span></b><span><span data-l="en">Inbox</span><span data-l="es">Bandeja de entrada</span></span></div>
           <div class="frame-body">
+            <div id="msg-inbox">
             <div class="inbox-top">
               <span class="inbox-title"><span data-l="en">Inbox</span><span data-l="es">Bandeja</span> <span class="badge num" id="msg-badge"></span></span>
               <div class="seg" role="group" aria-label="Filter">
@@ -434,6 +450,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
               </div>
             </div>
             <ul class="msg-list" id="msg-list"></ul>
+            </div>
+            <div id="msg-view" hidden aria-live="polite"></div>
           </div>
         </div>
       </div>
@@ -772,19 +790,68 @@ const EMAIL = "feny9one@yahoo.com";
   /* ---------- Payer Messages inbox ---------- */
   let filter = "all";
   const msgs = [
-    { who:"Ana Torres", acc:"ACC-1042", en:"Question about my March statement", es:"Consulta sobre mi estado de cuenta de marzo", t:"9:41", unread:true },
-    { who:"Luis Benítez", acc:"ACC-2210", en:"Can I change my payment date?", es:"¿Puedo cambiar mi fecha de pago?", t:"8:15", unread:true },
-    { who:"Mary Collins", acc:"ACC-0877", en:"Insurance adjustment on my bill", es:"Ajuste del seguro en mi factura", t:"Mon", tes:"lun", unread:true },
-    { who:"John Park", acc:"ACC-3301", en:"Receipt for my last payment", es:"Recibo de mi último pago", t:"Mon", tes:"lun", unread:false },
-    { who:"Sofía Ramos", acc:"ACC-1519", en:"Updated mailing address", es:"Dirección postal actualizada", t:"Fri", tes:"vie", unread:false }
+    { who:"Ana Torres", acc:"ACC-1042", en:"Question about my March statement", es:"Consulta sobre mi estado de cuenta de marzo", t:"9:41", unread:true,
+      ben:"Hi, I received my March statement and the amount is higher than usual. Could you tell me what the new charge is for?",
+      bes:"Hola, recibí mi estado de cuenta de marzo y el monto es más alto de lo normal. ¿Me pueden decir a qué corresponde el nuevo cargo?" },
+    { who:"Luis Benítez", acc:"ACC-2210", en:"Can I change my payment date?", es:"¿Puedo cambiar mi fecha de pago?", t:"8:15", unread:true,
+      ben:"I get paid on the 15th. Is it possible to move my payment date from the 1st to the 16th?",
+      bes:"Me pagan el día 15. ¿Es posible cambiar mi fecha de pago del día 1 al 16?" },
+    { who:"Mary Collins", acc:"ACC-0877", en:"Insurance adjustment on my bill", es:"Ajuste del seguro en mi factura", t:"Mon", tes:"lun", unread:true,
+      ben:"My insurance processed the claim last week. Will the adjustment show on my next bill?",
+      bes:"Mi seguro procesó el reclamo la semana pasada. ¿El ajuste aparecerá en mi próxima factura?" },
+    { who:"John Park", acc:"ACC-3301", en:"Receipt for my last payment", es:"Recibo de mi último pago", t:"Mon", tes:"lun", unread:false,
+      ben:"Could you send me a receipt for the payment I made on Monday? I need it for my records.",
+      bes:"¿Me pueden enviar el recibo del pago que hice el lunes? Lo necesito para mis registros." },
+    { who:"Sofía Ramos", acc:"ACC-1519", en:"Updated mailing address", es:"Dirección postal actualizada", t:"Fri", tes:"vie", unread:false,
+      ben:"I moved recently. My new mailing address is 245 Oak Street, Apt 3. Please update my account.",
+      bes:"Me mudé hace poco. Mi nueva dirección es 245 Oak Street, Apt 3. Por favor actualicen mi cuenta." }
   ];
   const list = document.getElementById("msg-list");
+  const inboxEl = document.getElementById("msg-inbox");
+  const viewEl = document.getElementById("msg-view");
+  let openMsg = null, justSent = false;
+  msgs.forEach(m => m.replies = []);
+  const esc = t => t.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   document.querySelectorAll("[data-filter]").forEach(b => b.addEventListener("click", () => {
     filter = b.dataset.filter;
     document.querySelectorAll("[data-filter]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
     renderInbox();
   }));
+  function renderView(){
+    inboxEl.hidden = openMsg !== null;
+    viewEl.hidden = openMsg === null;
+    if (openMsg === null) return;
+    const m = msgs[openMsg];
+    const time = lang === "es" && m.tes ? m.tes : m.t;
+    const replies = m.replies.map(r => `<div class="bubble me"><span class="from">${T("You, billing office", "Tú, oficina de facturación")}</span>${esc(r)}</div>`).join("");
+    viewEl.innerHTML = `
+      <button type="button" class="linkbtn mv-back" data-back>${T("Back to inbox", "Volver a la bandeja")}</button>
+      <p class="mv-subj">${T(m.en, m.es)}</p>
+      <p class="mv-meta">${T("From", "De")} ${m.who}, ${m.acc}, ${time}</p>
+      <div class="thread">
+        <div class="bubble"><span class="from">${m.who}</span>${T(m.ben, m.bes)}</div>
+        ${replies}
+      </div>
+      <div class="reply">
+        <label for="mv-text">${T("Reply to", "Responder a")} ${m.who}</label>
+        <textarea id="mv-text" placeholder="${T("Write your reply", "Escribe tu respuesta")}"></textarea>
+        <div class="reply-row">
+          <span class="ok">${justSent ? T("Reply sent. The payer will see it in PayWoot.", "Respuesta enviada. El pagador la verá en PayWoot.") : ""}</span>
+          <button type="button" class="dbtn" id="mv-send" disabled>${T("Send reply", "Enviar respuesta")}</button>
+        </div>
+      </div>`;
+    const ta = viewEl.querySelector("#mv-text"), send = viewEl.querySelector("#mv-send");
+    ta.addEventListener("input", () => { send.disabled = !ta.value.trim(); });
+    send.addEventListener("click", () => {
+      m.replies.push(ta.value.trim()); justSent = true; renderView();
+      viewEl.querySelector("#mv-text").focus();
+    });
+  }
+  viewEl.addEventListener("click", e => {
+    if (e.target.closest("[data-back]")) { openMsg = null; justSent = false; renderInbox(); list.querySelector("button")?.focus(); }
+  });
   function renderInbox(){
+    renderView();
     const unread = msgs.filter(m => m.unread).length;
     const badge = document.getElementById("msg-badge");
     badge.textContent = unread; badge.classList.toggle("zero", unread === 0);
@@ -802,8 +869,11 @@ const EMAIL = "feny9one@yahoo.com";
   list.addEventListener("click", e => {
     const b = e.target.closest("[data-m]");
     if (!b) return;
-    msgs[+b.dataset.m].unread = false;
+    openMsg = +b.dataset.m;
+    msgs[openMsg].unread = false;
+    justSent = false;
     renderInbox();
+    viewEl.querySelector("[data-back]").focus();
   });
 
   /* ---------- Sign-in flow ---------- */
